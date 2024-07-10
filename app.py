@@ -8,7 +8,7 @@ st.set_page_config(page_title="NHL Dashboard", page_icon=":ice_hockey_stick_and_
 
 st.write('<style>div.block-container{padding-top:5rem;}</style>', unsafe_allow_html=True)
 st.title("NHL Team Statistics Dashboard")
-st.subheader("A Way to visualize the current status of your team in respect to the rest of the league")
+
 
 
 def social_icons(width=24, height=24, **kwargs):
@@ -74,6 +74,7 @@ with st.sidebar:
 
 if choose=="Teams":
      st.header("Teams")
+     st.subheader("A Way to visualize the current status of your team in respect to the rest of the league")
      situation_options = ["All Strengths", "Even Strength", "5v5", "5v5 Score & Venue Adjusted", "Power Play","5 on 4 PP", "Penalty Kill", "4 on 5 PK", "3 on 3", "With Empty Net", "Against Empty Net", 
                         ]
      score_options = ["All Scores", "Tied", "Leading", "Trailing", "Within 1", "Up 1", "Down 1", "3 on 3", 
