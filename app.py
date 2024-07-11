@@ -3,6 +3,20 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
 from streamlit_option_menu import option_menu
+import pymysql
+
+#Fetching the secrets
+connection_info = st.secrets["connections"]["mysql"]
+
+# Establishing the connection
+conn = pymysql.connect(
+    host=connection_info["host"],
+    port=connection_info["port"],
+    user=connection_info["username"],
+    password=connection_info["password"],
+    database=connection_info["database"],
+    charset=connection_info["query"]["charset"]
+)
 
 st.set_page_config(page_title="NHL Dashboard", page_icon=":ice_hockey_stick_and_puck:", layout="wide", initial_sidebar_state="auto")
 
@@ -75,17 +89,77 @@ with st.sidebar:
 if choose=="Teams":
      st.header("Teams")
      st.subheader("A Way to visualize the current status of your team in respect to the rest of the league")
-     situation_options = ["All Strengths", "Even Strength", "5v5", "5v5 Score & Venue Adjusted", "Power Play","5 on 4 PP", "Penalty Kill", "4 on 5 PK", "3 on 3", "With Empty Net", "Against Empty Net", 
+     situation_options = ["All Strengths", "Even Strength", "5v5", "5v5 Score & Venue Adjusted", "Power Play", "Penalty Kill", 
                         ]
      score_options = ["All Scores", "Tied", "Leading", "Trailing", "Within 1", "Up 1", "Down 1", "3 on 3", 
                         ]
-     type_options = ["Counts", "Rates"]
      with st.container():
-         left, middle, right = st.columns(3)
+         left, right = st.columns(2)
          with left:
              sit_selected = st.selectbox("Pick a situation", options = situation_options)
-         with middle:
-             score_selected = st.selectbox("Pick a Score option", options = score_options)
          with right:
-             sit_selected = st.selectbox("Pick a stat type", options = type_options)
+             score_selected = st.selectbox("Pick a Score option", options = score_options)
+     if sit_selected=="All Strengths" and score_selected== "All Scores":
+         try:
+            query=f"SELECT * FROM `allstrengthsallscorescounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Tied":
+         try:
+            query=f"SELECT * FROM `allstrengthstiedcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Leading":
+         try:
+            query=f"SELECT * FROM `allstrengthsleadingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Trailing":
+         try:
+            query=f"SELECT * FROM `allstrengthstrailingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Within 1":
+         try:
+            query=f"SELECT * FROM `allstrengthswithinonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `allstrengthsuponecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
+     if sit_selected=="All Strengths" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `allstrengthsdownonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
              
