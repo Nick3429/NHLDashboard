@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from streamlit_option_menu import option_menu
+import plotly_express as px
 import pymysql
 
 #Fetching the secrets
@@ -25,6 +27,8 @@ st.title("NHL Team Statistics Dashboard")
 
 
 
+
+
 def social_icons(width=24, height=24, **kwargs):
         icon_template = '''
         <a href="{url}" target="_blank" style="margin-right: 20px;">
@@ -44,6 +48,13 @@ def social_icons(width=24, height=24, **kwargs):
                 icons_html += icon_template.format(url=url, icon_src=icon_src, alt_text=name.capitalize(), width=width, height=height)
 
         return icons_html
+
+# def interactive_plot(dataframe):
+#     x_axis_val=st.selectbox("Select X-Axis Value", options=df.columns)
+#     y_axis_val=st.selectbox("Select Y-Axis Value", options=df.columns)
+
+#     plot=px.scatter(dataframe, x=x_axis_val, y=y_axis_val)
+#     st.plotly_chart(plot)
 
 # Sidebar: If using streamlit_option_menu
 with st.sidebar:
@@ -86,12 +97,16 @@ with st.sidebar:
             st.empty()
 
 
+
+
+
+
 if choose=="Teams":
      st.header("Teams")
      st.subheader("A Way to visualize the current status of your team in respect to the rest of the league")
-     situation_options = ["All Strengths", "Even Strength", "5v5", "5v5 Score & Venue Adjusted", "Power Play", "Penalty Kill", 
+     situation_options = ["All Strengths", "Even Strength", "5v5", "5v5 Score & Venue Adjusted", 
                         ]
-     score_options = ["All Scores", "Tied", "Leading", "Trailing", "Within 1", "Up 1", "Down 1", "3 on 3", 
+     score_options = ["All Scores", "Tied", "Leading", "Trailing", "Within 1", "Up 1", "Down 1", 
                         ]
      with st.container():
          left, right = st.columns(2)
@@ -104,6 +119,9 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthsallscorescounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #st.dataframe(df_teamlogos,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
@@ -113,6 +131,8 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthstiedcounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
@@ -122,6 +142,8 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthsleadingcounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+           # interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
@@ -131,6 +153,8 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthstrailingcounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
@@ -140,6 +164,8 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthswithinonecounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
@@ -149,17 +175,251 @@ if choose=="Teams":
             query=f"SELECT * FROM `allstrengthsuponecounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
         #      conn.close()
-     if sit_selected=="All Strengths" and score_selected== "Up 1":
+     if sit_selected=="All Strengths" and score_selected== "Down 1":
          try:
             query=f"SELECT * FROM `allstrengthsdownonecounts`"
             df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
          except pymysql.MySQLError as e:
              st.error(f"Error executing query: {e}")
         #  finally:
         #      conn.close()
-             
+     if sit_selected=="Even Strength" and score_selected== "All Scores":
+         try:
+            query=f"SELECT * FROM `evenstrengthallscorescounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
+     if sit_selected=="Even Strength" and score_selected== "Tied":
+         try:
+            query=f"SELECT * FROM `evenstrengthtiedcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
+     if sit_selected=="Even Strength" and score_selected== "Leading":
+         try:
+            query=f"SELECT * FROM `evenstrengthleadingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
+     if sit_selected=="Even Strength" and score_selected== "Trailing":
+         try:
+            query=f"SELECT * FROM `evenstrengthtrailingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
+     if sit_selected=="Even Strength" and score_selected== "Within 1":
+         try:
+            query=f"SELECT * FROM `evenstrengthwithinonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="Even Strength" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `evenstrengthuponecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="Even Strength" and score_selected== "Down 1":
+         try:
+            query=f"SELECT * FROM `evenstrengthdownonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
+     if sit_selected=="5v5" and score_selected== "All Scores":
+         try:
+            query=f"SELECT * FROM `5v5allscorescounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
+     if sit_selected=="5v5" and score_selected== "Tied":
+         try:
+            query=f"SELECT * FROM `5v5tiedcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
+     if sit_selected=="5v5" and score_selected== "Leading":
+         try:
+            query=f"SELECT * FROM `5v5leadingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
+     if sit_selected=="5v5" and score_selected== "Trailing":
+         try:
+            query=f"SELECT * FROM `5v5trailingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
+     if sit_selected=="5v5" and score_selected== "Within 1":
+         try:
+            query=f"SELECT * FROM `5v5withinonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `5v5uponecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5" and score_selected== "Down 1":
+         try:
+            query=f"SELECT * FROM `5v5downonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()     
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "All Scores":
+         try:
+            query=f"SELECT * FROM `adj5v5allscorescounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Tied":
+         try:
+            query=f"SELECT * FROM `adj5v5tiedcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Leading":
+         try:
+            query=f"SELECT * FROM `adj5v5leadingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Trailing":
+         try:
+            query=f"SELECT * FROM `adj5v5trailingcounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Within 1":
+         try:
+            query=f"SELECT * FROM `adj5v5withinonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `adj5v5uponecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Down 1":
+         try:
+            query=f"SELECT * FROM `adj5v5downonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
