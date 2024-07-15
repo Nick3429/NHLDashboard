@@ -103,6 +103,7 @@ if choose=="Teams":
      if sit_selected=="All Strengths" and score_selected== "All Scores":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsAllScoresCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_plot2.png")
             #st.dataframe(df_teamlogos,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))

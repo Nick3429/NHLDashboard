@@ -18,6 +18,7 @@ library(plotly)
 library(ggimage)
 library(scales)
 library(ggthemes)
+library(RCurl)
 centertitle <- theme(plot.title = element_text(hjust = 0.5))
 centersub <- theme(plot.subtitle = element_text(hjust = 0.5))
 ```
@@ -31,27 +32,42 @@ NHL_Logos <- read_csv("nhl_logos.csv")
 all_strengths <- left_join(AllStrengthsGraph,NHL_Logos,
                            by= c("Team"= "espn_team_name"))
 ```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz1 <- all_strengths %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
 
 
 Making Graph: All Strengths, All Scores, xGF vs xGA
 ```{r}
-all_strengths %>% 
+mean_xGF <- mean(viz1$xGF, na.rm = TRUE)
+mean_xGA <- mean(viz1$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+
+viz1 %>% 
   ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
-  geom_image(size=0.06, asp=1.0)+
+  geom_image(size=0.06, asp=asp)+
   labs(title= "NHl 2023-2024",
         subtitle = "xGF vs xGA",
         x= "xGA",
         y= "xGF")+
    centertitle+
    centersub +
-       annotate("text", x = 225, y = 225, 
-                label = "Bad Offense/Good Defense") +
-       annotate("text", x = 240, y = 275,
-                label = "Good Offense/Good Defense") + 
-       annotate("text", x = 275, y = 225,
-                label = "Bad Offense/ Bad Defense") + 
-       annotate("text", x = 275, y = 275,
-                label = "Good Offense / Bad Defense")+
+    geom_hline(yintercept = mean_xGF, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA, color = "white", linetype = "dashed") +
+       annotate("text", x = 235, y = 225, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 235, y = 290,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 280, y = 225,
+                label = "Bad Offense/ Bad Defense", color="white") + 
+       annotate("text", x = 280, y = 290,
+                label = "Good Offense / Bad Defense", color="white")+
   theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
   theme(
     plot.background = element_rect(fill = "#282a36", color = NA),
@@ -60,9 +76,58 @@ all_strengths %>%
     plot.subtitle = element_text(color = "white", hjust = 0.5),
     axis.title.x = element_text(color = "white"),
     axis.title.y = element_text(color = "white"),
-    axis.text = element_text(color = "white")
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
 
   )
 
+```
+Saving the plot
+```{r}
+ggsave(filename = "nhl_2023_2024_plot.png", plot = viz1, width = 10, height = 8, dpi = 300)
+```
+Saving the plot Attempt better(WORKS GREAT!!!!!!)
+```{r}
+ggsave(filename = "nhl_2023_2024_plot2.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+
+
+```{r}
+bound.label <- 0.38
+df.text <- data.frame(lab.text = c("Offense -, Defense -", "Offense +, Defense- ", "Offense +, Defense +", "Offense -, Defense +"), 
+                      x = c(bound.label, bound.label, -1*bound.label, -1*bound.label), 
+                      y = c(-1*bound.label, bound.label, bound.label, -1*bound.label))
+```
+
+
+Trying online solution
+```{r}
+url.logo <- getURL("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/nhl_logos.csv")
+df.logos <- read.csv(text = url.logo)
+all_strengths <- AllStrengthsGraph %>% 
+  left_join(df.logos, by = c("Team"= "espn_team_name"))
+
+ggplot(all_strengths, aes(x=xGA, y=xGF)) + 
+  geom_image(aes(image = espn_logo), size = 0.05) + 
+  xlab("xGA: Expected Goals Against") + 
+  ylab("xGF: Expected Goals For") + 
+  theme_minimal() + 
+  labs(title = "All Strengths, NHL Regular Season", subtitle = "Data courtesy: Natural StatTrick") + 
+  geom_hline(aes(yintercept = 0), lty = 2, col = "red", alpha = 0.5)+ 
+  geom_vline(aes(xintercept = 0), lty = 2, col = "red", alpha = 0.5) +
+  xlim(c(200, 315)) + ylim(c(200, 315)) + 
+  geom_text(data = df.text, aes(x, y, label = lab.text), colour = "red")
+```
+Online Solution 2
+```{r}
+set.seed(2020-01-09)
+d <- data.frame(x = rnorm(34),y = rnorm(34),
+                teams = read_csv("https://raw.githubusercontent.com/leesharpe/nfldata/master/data/logos.csv"))
+asp <- 1.618
+width <- 20
+ggplot(d, aes(x, y)) + theme_bw() + geom_image(aes(image=teams.team_logo), asp=asp)
+ggsave('ggimage_example.png', dpi=600, width = width, height = width/asp, units = "cm")
 ```
 
