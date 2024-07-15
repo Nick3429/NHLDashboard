@@ -25,17 +25,18 @@ centersub <- theme(plot.subtitle = element_text(hjust = 0.5))
 
 Alright time to make some graphs now that packages are loaded in
 ```{r}
-AllStrengthsGraph <- read_csv("AllStrengthsAllScoresCounts.csv")
+ASAS <- read_csv("AllStrengthsAllScoresCounts.csv")
 NHL_Logos <- read_csv("nhl_logos.csv")
 ```
+
 ```{r}
-all_strengths <- left_join(AllStrengthsGraph,NHL_Logos,
+AS_AllScores <- left_join(ASAS,NHL_Logos,
                            by= c("Team"= "espn_team_name"))
 ```
 Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
 ```{r}
 
-viz1 <- all_strengths %>% 
+viz1 <- AS_AllScores %>% 
   select(espn_logo,xGF,xGA) %>% 
   mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
 ```
@@ -52,10 +53,11 @@ width<- 20
 viz1 %>% 
   ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
   geom_image(size=0.06, asp=asp)+
-  labs(title= "NHl 2023-2024",
-        subtitle = "xGF vs xGA",
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, All Strengths)",
         x= "xGA",
-        y= "xGF")+
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
    centertitle+
    centersub +
     geom_hline(yintercept = mean_xGF, color = "white", linetype = "dashed") +
@@ -65,15 +67,16 @@ viz1 %>%
        annotate("text", x = 235, y = 290,
                 label = "Good Offense/Good Defense", color="white") + 
        annotate("text", x = 280, y = 225,
-                label = "Bad Offense/ Bad Defense", color="white") + 
+                label = "Bad Offense/Bad Defense", color="white") + 
        annotate("text", x = 280, y = 290,
-                label = "Good Offense / Bad Defense", color="white")+
+                label = "Good Offense/Bad Defense", color="white")+
   theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
   theme(
     plot.background = element_rect(fill = "#282a36", color = NA),
     panel.background = element_rect(fill = "#282a36", color = NA),
     plot.title = element_text(color = "white", hjust = 0.5),
     plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
     axis.title.x = element_text(color = "white"),
     axis.title.y = element_text(color = "white"),
     axis.text = element_text(color = "white"),
@@ -83,51 +86,449 @@ viz1 %>%
   )
 
 ```
-Saving the plot
-```{r}
-ggsave(filename = "nhl_2023_2024_plot.png", plot = viz1, width = 10, height = 8, dpi = 300)
-```
+
 Saving the plot Attempt better(WORKS GREAT!!!!!!)
 ```{r}
-ggsave(filename = "nhl_2023_2024_plot2.png", dpi=600, width = width, height = width/asp, units = "cm")
+ggsave(filename = "nhl_2023_2024_ASAS.png", dpi=600, width = width, height = width/asp, units = "cm")
 ```
 
+Now, we have successfully made an Expected Goals For vs Expected Goals Against plot for the 2023-24 regular season for All Scores and Strengths. Going to keep making the same graph but for different scores and strengths. 
 
+2)All Strengths, and Tied
 
+Load in the data
 ```{r}
-bound.label <- 0.38
-df.text <- data.frame(lab.text = c("Offense -, Defense -", "Offense +, Defense- ", "Offense +, Defense +", "Offense -, Defense +"), 
-                      x = c(bound.label, bound.label, -1*bound.label, -1*bound.label), 
-                      y = c(-1*bound.label, bound.label, bound.label, -1*bound.label))
+AST <- read_csv("AllStrengthsTiedCounts.csv")
 ```
 
-
-Trying online solution
+Merge with NHL Logo Data
 ```{r}
-url.logo <- getURL("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/nhl_logos.csv")
-df.logos <- read.csv(text = url.logo)
-all_strengths <- AllStrengthsGraph %>% 
-  left_join(df.logos, by = c("Team"= "espn_team_name"))
-
-ggplot(all_strengths, aes(x=xGA, y=xGF)) + 
-  geom_image(aes(image = espn_logo), size = 0.05) + 
-  xlab("xGA: Expected Goals Against") + 
-  ylab("xGF: Expected Goals For") + 
-  theme_minimal() + 
-  labs(title = "All Strengths, NHL Regular Season", subtitle = "Data courtesy: Natural StatTrick") + 
-  geom_hline(aes(yintercept = 0), lty = 2, col = "red", alpha = 0.5)+ 
-  geom_vline(aes(xintercept = 0), lty = 2, col = "red", alpha = 0.5) +
-  xlim(c(200, 315)) + ylim(c(200, 315)) + 
-  geom_text(data = df.text, aes(x, y, label = lab.text), colour = "red")
+AS_Tied <- left_join(AST,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
 ```
-Online Solution 2
+
+Select Team Logo, xGF, xGA
 ```{r}
-set.seed(2020-01-09)
-d <- data.frame(x = rnorm(34),y = rnorm(34),
-                teams = read_csv("https://raw.githubusercontent.com/leesharpe/nfldata/master/data/logos.csv"))
+viz2 <- AS_Tied %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASTied <- mean(viz2$xGF, na.rm = TRUE)
+mean_xGA_ASTied <- mean(viz2$xGA, na.rm = TRUE)
 asp <- 1.618
-width <- 20
-ggplot(d, aes(x, y)) + theme_bw() + geom_image(aes(image=teams.team_logo), asp=asp)
-ggsave('ggimage_example.png', dpi=600, width = width, height = width/asp, units = "cm")
+width<- 20
+
+#50 to 115 in both direction for limits
+viz2 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Tied)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASTied, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASTied, color = "white", linetype = "dashed") +
+       annotate("text", x = 72, y = 62.5, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 72, y = 110,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 100, y = 62.5,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 100, y = 110,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
 ```
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASTied.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+
+
+3)All Strengths, and Leading
+
+Load in the data
+```{r}
+ASL <- read_csv("AllStrengthsLeadingCounts.csv")
+```
+
+Merge with NHL Logo Data
+```{r}
+AS_Leading <- left_join(ASL,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+Select Team Logo, xGF, xGA
+```{r}
+viz3 <- AS_Leading %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASLeading <- mean(viz3$xGF, na.rm = TRUE)
+mean_xGA_ASLeading <- mean(viz3$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#50 to 115 in both direction for limits
+viz3 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Leading)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASLeading, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASLeading, color = "white", linetype = "dashed") +
+       annotate("text", x = 72, y = 62.5, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 72, y = 110,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 100, y = 62.5,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 100, y = 110,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+```
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASLeading.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+4)All Strengths, and Trailing
+
+Load in the data
+```{r}
+ASTrail <- read_csv("AllStrengthsTrailingCounts.csv")
+```
+
+Merge with NHL Logo Data
+```{r}
+AS_Trailing <- left_join(ASTrail,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+Select Team Logo, xGF, xGA
+```{r}
+viz4 <- AS_Trailing %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASTrailing <- mean(viz4$xGF, na.rm = TRUE)
+mean_xGA_ASTrailing <- mean(viz4$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#50 to 115 in both direction for limits
+viz4 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Trailing)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASTrailing, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASTrailing, color = "white", linetype = "dashed") +
+       annotate("text", x = 66, y = 62.5, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 66, y = 110,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 108, y = 62.5,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 108, y = 110,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+```
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASTrailing.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+
+5)All Strengths, and Within One
+
+Load in the data
+```{r}
+ASW1 <- read_csv("AllStrengthsWithinOneCounts.csv")
+```
+
+Merge with NHL Logo Data
+```{r}
+AS_Within1 <- left_join(ASW1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+Select Team Logo, xGF, xGA
+```{r}
+viz5 <- AS_Within1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASW1 <- mean(viz5$xGF, na.rm = TRUE)
+mean_xGA_ASW1 <- mean(viz5$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#125 to 210 in both direction for limits
+viz5 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Within One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASW1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASW1, color = "white", linetype = "dashed") +
+       annotate("text", x = 153, y = 120, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 153, y = 200,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 190, y = 120,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 190, y = 200,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+```
+
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASW1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+6)All Strengths, and Up One
+
+Load in the data
+```{r}
+ASU1 <- read_csv("AllStrengthsUpOneCounts.csv")
+```
+
+Merge with NHL Logo Data
+```{r}
+AS_Up1 <- left_join(ASU1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+Select Team Logo, xGF, xGA
+```{r}
+viz6 <- AS_Up1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASU1 <- mean(viz6$xGF, na.rm = TRUE)
+mean_xGA_ASU1 <- mean(viz6$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#10 to 70 in both direction for limits
+viz6 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Up One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASU1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASU1, color = "white", linetype = "dashed") +
+       annotate("text", x = 38, y = 25, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 38, y = 58,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 58, y = 25,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 58, y = 58,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+```
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASU1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+7)All Strengths, and Down One
+
+Load in the data
+```{r}
+ASD1 <- read_csv("AllStrengthsDownOneCounts.csv")
+```
+
+Merge with NHL Logo Data
+```{r}
+AS_Down1 <- left_join(ASD1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+Select Team Logo, xGF, xGA
+```{r}
+viz7 <- AS_Down1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+Making the Graph: All Strengths, and Tied
+```{r}
+mean_xGF_ASD1 <- mean(viz7$xGF, na.rm = TRUE)
+mean_xGA_ASD1 <- mean(viz7$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#10 to 70 in both direction for limits
+viz7 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (All Scores, Down One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF_ASD1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA_ASD1, color = "white", linetype = "dashed") +
+       annotate("text", x = 32, y = 25, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 32, y = 58,
+                label = "Good Offense/Good Defense", color="white") +
+       annotate("text", x = 58, y = 25,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 58, y = 58,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+```
+
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_ASD1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+8)Even Strength, and All Scores
+9)Even Strength, and Tied
+10)Even Strength, and Leading
+11)Even Strength, and Trailing
+12)Even Strength, and Within One
+13)Even Strength, and Up One
+14)Even Strength, and Down One
+
+15)5v5, and All Scores 
+16)5v5, and Tied 
+17)5v5, and Leading 
+18)5v5, and Trailing
+19)5v5, and Within One
+20)5v5, and Up One 
+21)5v5, and Down One
+
+22)Score and Venue adjusted 5v5, and All Scores 
+23)Score and Venue adjusted 5v5, and Tied 
+24)Score and Venue adjusted 5v5, and Leading 
+25)Score and Venue adjusted 5v5, and Trailing
+26)Score and Venue adjusted 5v5, and Within One
+27)Score and Venue adjusted 5v5, and Up One 
+28)Score and Venue adjusted 5v5, and Down One
+
 

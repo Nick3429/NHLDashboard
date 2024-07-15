@@ -103,38 +103,44 @@ if choose=="Teams":
      if sit_selected=="All Strengths" and score_selected== "All Scores":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsAllScoresCounts.csv")
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_plot2.png")
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASAS.png")
             #st.dataframe(df_teamlogos,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Tied":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTiedCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTied.png")
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Leading":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsLeadingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASLeading.png")
            # interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Trailing":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTrailingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTrailing.png")
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Within 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsWithinOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASW1.png")
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Up 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsUpOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASU1.png")
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Down 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsDownOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASD1.png")
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "All Scores":
