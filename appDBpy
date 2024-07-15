@@ -5,6 +5,20 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from streamlit_option_menu import option_menu
 import plotly_express as px
+import pymysql
+
+#Fetching the secrets
+connection_info = st.secrets["connections"]["mysql"]
+
+# Establishing the connection
+conn = pymysql.connect(
+    host=connection_info["host"],
+    port=connection_info["port"],
+    user=connection_info["username"],
+    password=connection_info["password"],
+    database=connection_info["database"],
+    charset=connection_info["query"]["charset"]
+)
 
 st.set_page_config(page_title="NHL Dashboard", page_icon=":ice_hockey_stick_and_puck:", layout="wide", initial_sidebar_state="auto")
 
@@ -101,164 +115,311 @@ if choose=="Teams":
          with right:
              score_selected = st.selectbox("Pick a Score option", options = score_options)
      if sit_selected=="All Strengths" and score_selected== "All Scores":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsAllScoresCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthsallscorescounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASAS.png")
             #st.dataframe(df_teamlogos,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Tied":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTiedCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthstiedcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTied.png")
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Leading":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsLeadingCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthsleadingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASLeading.png")
            # interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Trailing":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTrailingCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthstrailingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTrailing.png")
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Within 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsWithinOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthswithinonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASW1.png")
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Up 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsUpOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthsuponecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASU1.png")
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="All Strengths" and score_selected== "Down 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsDownOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `allstrengthsdownonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASD1.png")
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
      if sit_selected=="Even Strength" and score_selected== "All Scores":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthAllScoresCounts.csv")           
+         try:
+            query=f"SELECT * FROM `evenstrengthallscorescounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVAS.png")
             #interactive_plot(df)
-            st.write(len(df))      
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
      if sit_selected=="Even Strength" and score_selected== "Tied":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTiedCounts.csv")  
+         try:
+            query=f"SELECT * FROM `evenstrengthtiedcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTied.png") 
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
      if sit_selected=="Even Strength" and score_selected== "Leading":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthLeadingCounts.csv")
+         try:
+            query=f"SELECT * FROM `evenstrengthleadingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVLeading.png") 
             #interactive_plot(df)
-            st.write(len(df)) 
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
      if sit_selected=="Even Strength" and score_selected== "Trailing":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTrailingCounts.csv")
+         try:
+            query=f"SELECT * FROM `evenstrengthtrailingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTrailing.png") 
             #interactive_plot(df)
-            st.write(len(df))   
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
      if sit_selected=="Even Strength" and score_selected== "Within 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthWithinOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `evenstrengthwithinonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVW1.png") 
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
      if sit_selected=="Even Strength" and score_selected== "Up 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthUpOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `evenstrengthuponecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVU1.png") 
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
      if sit_selected=="Even Strength" and score_selected== "Down 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthDownOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `evenstrengthdownonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVD1.png") 
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
      if sit_selected=="5v5" and score_selected== "All Scores":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5AllScoresCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5allscorescounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5AS.png") 
             #interactive_plot(df)
-            st.write(len(df))       
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
      if sit_selected=="5v5" and score_selected== "Tied":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TiedCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5tiedcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Tied.png") 
             #interactive_plot(df)
-            st.write(len(df)) 
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
      if sit_selected=="5v5" and score_selected== "Leading":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5LeadingCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5leadingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Leading.png") 
             #interactive_plot(df)
-            st.write(len(df))  
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
      if sit_selected=="5v5" and score_selected== "Trailing":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TrailingCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5trailingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Trailing.png") 
             #interactive_plot(df)
-            st.write(len(df))  
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
      if sit_selected=="5v5" and score_selected== "Within 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5WithinOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5withinonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5W1.png") 
             #interactive_plot(df)
-            st.write(len(df))  
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
      if sit_selected=="5v5" and score_selected== "Up 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5UpOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5uponecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5U1.png") 
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
      if sit_selected=="5v5" and score_selected== "Down 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5DownOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `5v5downonecounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
-            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5D1.png") 
             #interactive_plot(df)
-            st.write(len(df))    
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()     
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "All Scores":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5AllScoresCounts.csv")
+         try:
+            query=f"SELECT * FROM `adj5v5allscorescounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
             #interactive_plot(df)
-            st.write(len(df))      
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()       
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Tied":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5TiedCounts.csv")
+         try:
+            query=f"SELECT * FROM `adj5v5tiedcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close() 
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Leading":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5LeadingCounts.csv")
+         try:
+            query=f"SELECT * FROM `adj5v5leadingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()   
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Trailing":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5TrailingCounts.csv")
-            st.dataframe(df,hide_index=True)
-            #interactive_plot(df)
-            st.write(len(df))   
-     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Within 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5WithinOneCounts.csv")
-            st.dataframe(df,hide_index=True)
-            #interactive_plot(df)
-            st.write(len(df)) 
-     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Up 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5UpOneCounts.csv")
-            st.dataframe(df,hide_index=True)
-            #interactive_plot(df)
-            st.write(len(df)) 
-     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Down 1":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5DownOneCounts.csv")
+         try:
+            query=f"SELECT * FROM `adj5v5trailingcounts`"
+            df=pd.read_sql(query,conn)
             st.dataframe(df,hide_index=True)
             #interactive_plot(df)
             st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()    
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Within 1":
+         try:
+            query=f"SELECT * FROM `adj5v5withinonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Up 1":
+         try:
+            query=f"SELECT * FROM `adj5v5uponecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()  
+     if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Down 1":
+         try:
+            query=f"SELECT * FROM `adj5v5downonecounts`"
+            df=pd.read_sql(query,conn)
+            st.dataframe(df,hide_index=True)
+            #interactive_plot(df)
+            st.write(len(df))
+         except pymysql.MySQLError as e:
+             st.error(f"Error executing query: {e}")
+        #  finally:
+        #      conn.close()
