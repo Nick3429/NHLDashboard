@@ -989,12 +989,6 @@ Saving the graph to a png
 ```{r}
 ggsave(filename = "nhl_2023_2024_EVD1.png", dpi=600, width = width, height = width/asp, units = "cm")
 ```
-9)Even Strength, and Tied
-10)Even Strength, and Leading
-11)Even Strength, and Trailing
-12)Even Strength, and Within One
-13)Even Strength, and Up One
-14)Even Strength, and Down One
 
 15)5v5, and All Scores 
 16)5v5, and Tied 
