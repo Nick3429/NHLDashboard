@@ -990,13 +990,491 @@ Saving the graph to a png
 ggsave(filename = "nhl_2023_2024_EVD1.png", dpi=600, width = width, height = width/asp, units = "cm")
 ```
 
-15)5v5, and All Scores 
+15)5v5, and All Scores
+```{r}
+FiveVFiveAS <- read_csv("5v5AllScoresCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_AllScores <- left_join(FiveVFiveAS,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz15 <- FiveV5_AllScores %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5AS <- mean(viz15$xGF, na.rm = TRUE)
+mean_xGA5v5AS <- mean(viz15$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#145 to 245
+viz15 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, All Scores)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5AS, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5AS, color = "white", linetype = "dashed") +
+       annotate("text", x = 153, y = 140, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 153, y = 200,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 190, y = 140,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 190, y = 200,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+```
+
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5AS.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 16)5v5, and Tied 
-17)5v5, and Leading 
+```{r}
+FiveVFiveT <- read_csv("5v5TiedCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_Tied <- left_join(FiveVFiveT,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz16 <- FiveV5_Tied %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5Tied <- mean(viz16$xGF, na.rm = TRUE)
+mean_xGA5v5Tied <- mean(viz16$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#145 to 245
+viz16 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Tied)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5Tied, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5Tied, color = "white", linetype = "dashed") +
+       annotate("text", x = 50, y = 40, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 50, y = 75,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 68, y = 40,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 68, y = 75,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+```
+Saving the graph to a png
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5Tied.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
+17)5v5, and Leading
+```{r}
+FiveVFiveLead <- read_csv("5v5LeadingCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_Leading <- left_join(FiveVFiveLead,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz17 <- FiveV5_Leading %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5Lead <- mean(viz17$xGF, na.rm = TRUE)
+mean_xGA5v5Lead <- mean(viz17$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#145 to 245
+viz17 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Leading)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5Lead, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5Lead, color = "white", linetype = "dashed") +
+       annotate("text", x = 45, y = 35, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 45, y = 75,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 70, y = 35,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 70, y = 75,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+```
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5Leading.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 18)5v5, and Trailing
+```{r}
+FiveVFiveTrail <- read_csv("5v5TrailingCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_Trailing <- left_join(FiveVFiveTrail,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz18 <- FiveV5_Trailing %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5Trail <- mean(viz18$xGF, na.rm = TRUE)
+mean_xGA5v5Trail <- mean(viz18$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#145 to 245
+viz18 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Trailing)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5Trail, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5Trail, color = "white", linetype = "dashed") +
+       annotate("text", x = 38, y = 35, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 38, y = 75,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 75, y = 35,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 75, y = 75,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+
+```
+
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5Trailing.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 19)5v5, and Within One
+```{r}
+FiveVFiveWth1 <- read_csv("5v5WithinOneCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_W1 <- left_join(FiveVFiveWth1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz19 <- FiveV5_W1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5W1 <- mean(viz19$xGF, na.rm = TRUE)
+mean_xGA5v5W1 <- mean(viz19$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#90 to 145
+viz19 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Within One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5W1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5W1, color = "white", linetype = "dashed") +
+       annotate("text", x = 105, y = 92, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 105, y = 137,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 130, y = 92,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 130, y = 137,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+
+```
+
+
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5W1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 20)5v5, and Up One 
+```{r}
+FiveVFiveUp1 <- read_csv("5v5UpOneCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_U1 <- left_join(FiveVFiveUp1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz20 <- FiveV5_U1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5U1 <- mean(viz20$xGF, na.rm = TRUE)
+mean_xGA5v5U1 <- mean(viz20$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#0 to 45
+viz20 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Up One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5U1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5U1, color = "white", linetype = "dashed") +
+       annotate("text", x = 25, y = 15, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 25, y = 45,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 38, y = 15,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 38, y = 45,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+
+```
+
+
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5U1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 21)5v5, and Down One
+```{r}
+FiveVFiveDown1 <- read_csv("5v5DownOneCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+
+```{r}
+FiveV5_D1 <- left_join(FiveVFiveDown1,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+Selecting only espn_logo, xGA,xGF from the dataframe to avoid null values messing it up.
+```{r}
+
+viz21 <- FiveV5_D1 %>% 
+  select(espn_logo,xGF,xGA) %>% 
+  mutate(espn_logo=replace_na(espn_logo,"https://a.espncdn.com/i/teamlogos/nhl/500/stl.png"))
+```
+
+
+Making Graph: Even Strength, All Scores, xGF vs xGA
+```{r}
+mean_xGF5v5D1 <- mean(viz21$xGF, na.rm = TRUE)
+mean_xGA5v5D1 <- mean(viz21$xGA, na.rm = TRUE)
+asp <- 1.618
+width<- 20
+
+#0 to 45
+viz21 %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=asp)+
+  labs(title= "NHL 2023-2024",
+        subtitle = "xGF vs xGA (5v5, Down One)",
+        x= "xGA",
+        y= "xGF",
+        caption= "Data Source: Natural Stat Trick")+
+   centertitle+
+   centersub +
+    geom_hline(yintercept = mean_xGF5v5U1, color = "white", linetype = "dashed") +
+  geom_vline(xintercept = mean_xGA5v5U1, color = "white", linetype = "dashed") +
+       annotate("text", x = 21, y = 15, 
+                label = "Bad Offense/Good Defense", color="white") +
+       annotate("text", x = 21, y = 45,
+                label = "Good Offense/Good Defense", color="white") + 
+       annotate("text", x = 40, y = 15,
+                label = "Bad Offense/Bad Defense", color="white") + 
+       annotate("text", x = 40, y = 45,
+                label = "Good Offense/Bad Defense", color="white")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white"),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank()  # Remove minor grid lines
+
+  )
+
+
+```
+
+
+
+
+```{r}
+ggsave(filename = "nhl_2023_2024_5v5D1.png", dpi=600, width = width, height = width/asp, units = "cm")
+```
+
 
 22)Score and Venue adjusted 5v5, and All Scores 
 23)Score and Venue adjusted 5v5, and Tied 

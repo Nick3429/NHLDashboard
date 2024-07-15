@@ -188,36 +188,43 @@ if choose=="Teams":
      if sit_selected=="5v5" and score_selected== "All Scores":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5AllScoresCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5AS.png") 
             #interactive_plot(df)
             st.write(len(df))       
      if sit_selected=="5v5" and score_selected== "Tied":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TiedCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Tied.png") 
             #interactive_plot(df)
             st.write(len(df)) 
      if sit_selected=="5v5" and score_selected== "Leading":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5LeadingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Leading.png") 
             #interactive_plot(df)
             st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Trailing":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TrailingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Trailing.png") 
             #interactive_plot(df)
             st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Within 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5WithinOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5W1.png") 
             #interactive_plot(df)
             st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Up 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5UpOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5U1.png") 
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="5v5" and score_selected== "Down 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5DownOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5D1.png") 
             #interactive_plot(df)
             st.write(len(df))    
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "All Scores":
