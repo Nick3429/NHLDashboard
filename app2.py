@@ -144,38 +144,45 @@ if choose=="Teams":
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "All Scores":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthAllScoresCounts.csv")
+            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthAllScoresCounts.csv")           
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVAS.png")
             #interactive_plot(df)
             st.write(len(df))      
      if sit_selected=="Even Strength" and score_selected== "Tied":
-            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTiedCounts.csv")
+            df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTiedCounts.csv")  
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTied.png") 
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Leading":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthLeadingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVLeading.png") 
             #interactive_plot(df)
             st.write(len(df)) 
      if sit_selected=="Even Strength" and score_selected== "Trailing":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTrailingCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTrailing.png") 
             #interactive_plot(df)
             st.write(len(df))   
      if sit_selected=="Even Strength" and score_selected== "Within 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthWithinOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVW1.png") 
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Up 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthUpOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVU1.png") 
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Down 1":
             df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthDownOneCounts.csv")
             st.dataframe(df,hide_index=True)
+            st.image("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVD1.png") 
             #interactive_plot(df)
             st.write(len(df))
      if sit_selected=="5v5" and score_selected== "All Scores":
