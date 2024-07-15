@@ -1,0 +1,68 @@
+---
+title: "NHL Dashboard Graphs"
+author: "Nick Sofianakos"
+date: "2024-07-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+library(tidyquant)
+library(pacman)
+library(devtools)
+library(ggforce)
+library(plotly)
+library(ggimage)
+library(scales)
+library(ggthemes)
+centertitle <- theme(plot.title = element_text(hjust = 0.5))
+centersub <- theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+Alright time to make some graphs now that packages are loaded in
+```{r}
+AllStrengthsGraph <- read_csv("AllStrengthsAllScoresCounts.csv")
+NHL_Logos <- read_csv("nhl_logos.csv")
+```
+```{r}
+all_strengths <- left_join(AllStrengthsGraph,NHL_Logos,
+                           by= c("Team"= "espn_team_name"))
+```
+
+
+Making Graph: All Strengths, All Scores, xGF vs xGA
+```{r}
+all_strengths %>% 
+  ggplot(aes(x=xGA,y=xGF,image=espn_logo))+
+  geom_image(size=0.06, asp=1.0)+
+  labs(title= "NHl 2023-2024",
+        subtitle = "xGF vs xGA",
+        x= "xGA",
+        y= "xGF")+
+   centertitle+
+   centersub +
+       annotate("text", x = 225, y = 225, 
+                label = "Bad Offense/Good Defense") +
+       annotate("text", x = 240, y = 275,
+                label = "Good Offense/Good Defense") + 
+       annotate("text", x = 275, y = 225,
+                label = "Bad Offense/ Bad Defense") + 
+       annotate("text", x = 275, y = 275,
+                label = "Good Offense / Bad Defense")+
+  theme_minimal(base_family = "Arial") + # Use a minimal theme as the base
+  theme(
+    plot.background = element_rect(fill = "#282a36", color = NA),
+    panel.background = element_rect(fill = "#282a36", color = NA),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    axis.title.x = element_text(color = "white"),
+    axis.title.y = element_text(color = "white"),
+    axis.text = element_text(color = "white")
+
+  )
+
+```
+
