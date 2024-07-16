@@ -116,7 +116,7 @@ if choose=="Teams":
          with right:
              score_selected = st.selectbox("Pick a Score option", options = score_options)
      if sit_selected=="All Strengths" and score_selected== "All Scores":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsAllScoresCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASAS.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsAllScoresCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASAS.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsAllScoresCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -127,7 +127,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Tied":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsTiedCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTied.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsTiedCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASTied.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTiedCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -137,7 +137,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Leading":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsLeadingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASLeading.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsLeadingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASLeading.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsLeadingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -147,7 +147,7 @@ if choose=="Teams":
        #     # interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Trailing":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsTrailingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTrailing.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsTrailingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASTrailing.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsTrailingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -157,7 +157,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Within 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsWithinOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASW1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsWithinOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASW1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsWithinOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -167,7 +167,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Up 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsUpOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASU1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsUpOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASU1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsUpOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -177,7 +177,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="All Strengths" and score_selected== "Down 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsDownOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASD1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/AllStrengthsDownOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ASD1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/AllStrengthsDownOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -187,7 +187,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "All Scores":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthAllScoresCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVAS.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthAllScoresCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVAS.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthAllScoresCounts.csv")           
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -197,7 +197,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))      
      if sit_selected=="Even Strength" and score_selected== "Tied":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthTiedCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTied.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthTiedCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVTied.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTiedCounts.csv")  
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -207,7 +207,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Leading":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthLeadingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVLeading.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthLeadingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVLeading.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthLeadingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -217,7 +217,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df)) 
      if sit_selected=="Even Strength" and score_selected== "Trailing":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthTrailingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTrailing.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthTrailingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVTrailing.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthTrailingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -227,7 +227,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))   
      if sit_selected=="Even Strength" and score_selected== "Within 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthWithinOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVW1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthWithinOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVW1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthWithinOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -237,7 +237,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Up 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthUpOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVU1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthUpOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVU1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthUpOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -247,7 +247,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="Even Strength" and score_selected== "Down 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthDownOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVD1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/EvenStrengthDownOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_EVD1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/EvenStrengthDownOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -257,7 +257,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="5v5" and score_selected== "All Scores":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5AllScoresCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5AS.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5AllScoresCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5AS.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5AllScoresCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -267,7 +267,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))       
      if sit_selected=="5v5" and score_selected== "Tied":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5TiedCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Tied.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5TiedCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5Tied.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TiedCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -277,7 +277,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df)) 
      if sit_selected=="5v5" and score_selected== "Leading":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5LeadingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Leading.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5LeadingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5Leading.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5LeadingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -287,7 +287,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Trailing":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5TrailingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Trailing.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5TrailingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5Trailing.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5TrailingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -297,7 +297,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Within 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5WithinOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5W1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5WithinOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5W1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5WithinOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -307,7 +307,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))  
      if sit_selected=="5v5" and score_selected== "Up 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5UpOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5U1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5UpOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5U1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5UpOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -317,7 +317,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="5v5" and score_selected== "Down 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5DownOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5D1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/5v5DownOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_5v5D1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/5v5DownOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -327,7 +327,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))    
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "All Scores":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5AllScoresCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5AS.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5AllScoresCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5AS.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5AllScoresCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -337,7 +337,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))      
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Tied":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5TiedCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Tied.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5TiedCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5Tied.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5TiedCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -347,7 +347,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Leading":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5LeadingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Leading.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5LeadingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5Leading.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5LeadingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -357,7 +357,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Trailing":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5TrailingCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Trailing.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5TrailingCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5Trailing.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5TrailingCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -367,7 +367,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df))   
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Within 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5WithinOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5W1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5WithinOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5W1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5WithinOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -377,7 +377,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df)) 
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Up 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5UpOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5U1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5UpOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5U1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5UpOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
@@ -387,7 +387,7 @@ if choose=="Teams":
        #      #interactive_plot(df)
        #      st.write(len(df)) 
      if sit_selected=="5v5 Score & Venue Adjusted" and score_selected== "Down 1":
-          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5DownOneCounts.csv","C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5D1.png")
+          load_and_display_data("https://raw.githubusercontent.com/Nick3429/NHLDashboard/main/NHL%20Dashboard%20Graphs/Adj5v5DownOneCounts.csv","https://github.com/Nick3429/NHLDashboard/blob/main/NHL%20Dashboard%20Graphs/nhl_2023_2024_ADJ5v5D1.png?raw=true")
        #      df=pd.read_csv("C:/NHL Streamlit Dashboard/Regular Season 2023-24 Season CSV's/Adj5v5DownOneCounts.csv")
        #      st.dataframe(df,hide_index=True)
        #      with st.container():
