@@ -4,13 +4,15 @@ from matplotlib import pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from streamlit_option_menu import option_menu
-import plotly_express as px
+#import plotly_express as px
+from PIL import Image
 
 st.set_page_config(page_title="NHL Dashboard", page_icon=":ice_hockey_stick_and_puck:", layout="wide", initial_sidebar_state="auto")
 
 st.write('<style>div.block-container{padding-top:5rem;}</style>', unsafe_allow_html=True)
 st.title("NHL Team Statistics Dashboard")
 
+NHL_Logo=Image.open("NHL_Logo.png")
 
 
 
@@ -49,7 +51,7 @@ with st.sidebar:
         with l:
             st.empty()
         with m:
-            st.empty()
+            st.image(NHL_Logo,width=175)
         with r:
             st.empty()
     
