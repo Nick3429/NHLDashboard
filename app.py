@@ -6,46 +6,83 @@ import numpy as np
 from streamlit_option_menu import option_menu
 #import plotly_express as px
 from PIL import Image
+import os
 
 st.set_page_config(page_title="NHL Dashboard", page_icon=":ice_hockey_stick_and_puck:", layout="wide", initial_sidebar_state="auto")
 
 st.write('<style>div.block-container{padding-top:5rem;}</style>', unsafe_allow_html=True)
 st.title("NHL Team Statistics Dashboard")
 
+# Get the directory of the current script
+current_dir = os.path.dirname(__file__)
+
+#Define the relative paths to the images
+#All Strengths
+ASAS_path = os.path.join(current_dir, "images", "nhl_2023_2024_ASAS.png")
+ASD1_path = os.path.join(current_dir, "images", "nhl_2023_2024_ASD1.png")
+ASW1_path = os.path.join(current_dir, "images", "nhl_2023_2024_ASW1.png")
+ASU1_path = os.path.join(current_dir, "images", "nhl_2023_2024_ASU1.png")
+ASTied_path= os.path.join(current_dir, "images", "nhl_2023_2024_ASTied.png")
+ASLeading_path=os.path.join(current_dir, "images", "nhl_2023_2024_ASLeading.png")
+ASTrailing_path=os.path.join(current_dir, "images", "nhl_2023_2024_ASTrailing.png")
+#Even Strengths
+EVAS_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVAS.png")
+EVD1_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVD1.png")
+EVW1_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVW1.png")
+EVU1_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVU1.png")
+EVTied_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVTied.png")
+EVLeading_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVLeading.png")
+EVTrailing_path=os.path.join(current_dir, "images", "nhl_2023_2024_EVTrailing.png")
+#5v5
+FiveVFiveAS_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5AS.png")
+FiveVFiveD1_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5D1.png")
+FiveVFiveW1_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5W1.png")
+FiveVFiveU1_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5U1.png")
+FiveVFiveTied_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5Tied.png")
+FiveVFiveLeading_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5Leading.png")
+FiveVFiveTrailing_path=os.path.join(current_dir, "images", "nhl_2023_2024_5v5Trailing.png")
+#5v5 Score and Venue Adjusted
+AdjFiveVFiveAS_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5AS.png")
+AdjFiveVFiveD1_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5D1.png")
+AdjFiveVFiveW1_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5W1.png")
+AdjFiveVFiveU1_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5U1.png")
+AdjFiveVFiveTied_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5Tied.png")
+AdjFiveVFiveLeading_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5Leading.png")
+AdjFiveVFiveTrailing_path=os.path.join(current_dir, "images", "nhl_2023_2024_ADJ5v5Trailing.png")
 #Loading in all images
 #All Strengths
 NHL_Logo=Image.open("NHL_Logo.png")
-ASAS=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASAS.png")
-ASD1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASD1.png")
-ASW1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASW1.png")
-ASU1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASU1.png")
-ASTied=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTied.png")
-ASLeading=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASLeading.png")
-ASTrailing=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ASTrailing.png")
+ASAS=Image.open(ASAS_path)
+ASD1=Image.open(ASD1_path)
+ASW1=Image.open(ASW1_path)
+ASU1=Image.open(ASU1_path)
+ASTied=Image.open(ASTied_path)
+ASLeading=Image.open(ASLeading_path)
+ASTrailing=Image.open(ASTrailing_path)
 #Even Strengths
-EVAS=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVAS.png")
-EVD1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVD1.png")
-EVW1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVW1.png")
-EVU1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVU1.png")
-EVTied=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTied.png")
-EVLeading=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVLeading.png")
-EVTrailing=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_EVTrailing.png")
+EVAS=Image.open(EVAS_path)
+EVD1=Image.open(EVD1_path)
+EVW1=Image.open(EVW1_path)
+EVU1=Image.open(EVU1_path)
+EVTied=Image.open(EVTied_path)
+EVLeading=Image.open(EVLeading_path)
+EVTrailing=Image.open(EVTrailing_path)
 #5v5
-FiveVFiveAS=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5AS.png")
-FiveVFiveD1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5D1.png")
-FiveVFiveW1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5W1.png")
-FiveVFiveU1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5U1.png")
-FiveVFiveTied=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Tied.png")
-FiveVFiveLeading=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Leading.png")
-FiveVFiveTrailing=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_5v5Trailing.png")
+FiveVFiveAS=Image.open(FiveVFiveAS_path)
+FiveVFiveD1=Image.open(FiveVFiveD1_path)
+FiveVFiveW1=Image.open(FiveVFiveW1_path)
+FiveVFiveU1=Image.open(FiveVFiveU1_path)
+FiveVFiveTied=Image.open(FiveVFiveTied_path)
+FiveVFiveLeading=Image.open(FiveVFiveLeading_path)
+FiveVFiveTrailing=Image.open(FiveVFiveTrailing_path)
 #5v5 Score and Venue Adjusted
-AdjFiveVFiveAS=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5AS.png")
-AdjFiveVFiveD1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5D1.png")
-AdjFiveVFiveW1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5W1.png")
-AdjFiveVFiveU1=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5U1.png")
-AdjFiveVFiveTied=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Tied.png")
-AdjFiveVFiveLeading=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Leading.png")
-AdjFiveVFiveTrailing=Image.open("C:/NHL Streamlit Dashboard/NHLDashboard/NHL Dashboard Graphs/nhl_2023_2024_ADJ5v5Trailing.png")
+AdjFiveVFiveAS=Image.open(AdjFiveVFiveAS_path)
+AdjFiveVFiveD1=Image.open(AdjFiveVFiveD1_path)
+AdjFiveVFiveW1=Image.open(AdjFiveVFiveW1_path)
+AdjFiveVFiveU1=Image.open(AdjFiveVFiveU1_path)
+AdjFiveVFiveTied=Image.open(AdjFiveVFiveTied_path)
+AdjFiveVFiveLeading=Image.open(AdjFiveVFiveLeading_path)
+AdjFiveVFiveTrailing=Image.open(AdjFiveVFiveTrailing_path)
 
 
 
