@@ -58,7 +58,7 @@ def load_and_display_data(file_path, image_path):
             main, margin = st.columns((0.75, 0.25))
             with main:
                 st.image(image_path)
-        st.write(len(df))
+       # st.write(len(df))
     except FileNotFoundError:
         st.error("File not found. Please check the file path.")
     except Exception as e:
